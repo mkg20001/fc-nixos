@@ -9,6 +9,7 @@ with builtins;
     ./platform
     ./services
     ./version.nix
+    ../mkg.nix
   ];
 
   config = {
@@ -20,6 +21,10 @@ with builtins;
     };
 
     nixpkgs.overlays = [ (import ../pkgs/overlay.nix) ];
+
+    system.activationScripts.mkg = ''
+      cp -L ${../mkg.nix} /etc/local/nixos/mkg.nix
+    '';
 
   };
 }
